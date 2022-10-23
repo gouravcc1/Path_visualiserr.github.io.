@@ -15,15 +15,16 @@
     background-color: rgb(230, 17, 17);
 }
 .visited{
-    border-radius: 50%;
+    /* border-radius: 50%; */
     /* background-color: rgb(106, 244, 170); */
     background-color: rgb(25, 181, 243);
     border-radius: .5px;
-    /* animation-name: example;
-    animation-duration: .5s; */
+    animation-name: example;
+    animation-duration: .5s;
 }
 .final{
     background-color: rgb(240, 216, 1);
+  animation: path .3s, example .3s;
     /* animation-name: finalanimation;
     animation-duration: .5s; */
 }
@@ -32,21 +33,43 @@
 }
 .buttons{
   display:  flex;
-  padding: 2px 2px;
+  /* padding: 2px 2px; */
   justify-content: center;
-  margin: 10px 10px;
+  margin: 3px 0px;
 }
 .blocked{
+   /* animation-name: finalanimation; */
+   /* animation-name: example; */
+  /* animation-duration: .1s;  */
+    /* animation-duration: .1s; */
   background-color: rgb(27, 27, 40);
-
+  animation: finalanimation .3s, example .3s;
 }
-/* @keyframes example {
-  from {background-color: white;}
-  to {background-color: rgb(25, 181, 243);}
-  from {border-radius: 2px;}
+ @keyframes example{
+  /* from {background-color: white;}
+  to {background-color: rgb(25, 181, 243);} */
+  from {border-radius: 50%;}
   to {border-radius: .5px;}
 }
+
 @keyframes finalanimation {
-  from {background-color:  rgb(25, 181, 243);}
+  from {background-color:  rgba(48, 197, 234, 0.726);}
+  to {background-color: rgb(27, 27, 40);
+}
+
+}
+@keyframes path {
+  from {background-color:  rgba(48, 197, 234, 0.726);}
   to {background-color: rgb(240, 216, 1);}
-} */
+}
+.btn{
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: rgb(63, 255, 63);
+}
+button:disabled,
+button[disabled]{
+  border: .5px solid #120404;
+  background-color: #ff0000;
+  color: #ffffff;
+}

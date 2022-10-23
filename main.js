@@ -40,6 +40,8 @@ function createmaz() {
 creatediv();
 createmaz();
 function randmize() {
+  disablebuttons();
+  t=100;
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       let c = document.getElementById(i + "|" + j);
@@ -55,12 +57,17 @@ function randmize() {
       let x = Math.floor(Math.random() * 3 + 1);
       if (x == 1 && !(i == s.i && j == s.j) && !(i == e.i && j == e.j)) {
         visited[i][j] = 2;
-        let c = document.getElementById(i + "|" + j);
+        setTimeout((i,j)=>{ 
+        let c = document.getElementById(i + '|' + j);
         c.classList.add("blocked");
+      },t,i,j);
+      t+=100;
       }else{
         visited[i][j] = 0;
       }
     }
+    setTimeout(enablebuttons,t+1000)
+    t=100;
   }
 }
 function clearemaz(){
