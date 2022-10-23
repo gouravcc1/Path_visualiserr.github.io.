@@ -1,7 +1,7 @@
-const n = 25;
+const n = 29;
 var visited;
 let t = 100;
-let path = [];
+let time_increament;
 // start end intialization
 let s = { i: 7, j: 7 };
 let e = { i: 20, j: 20 };
@@ -13,6 +13,7 @@ function creatediv() {
       x.setAttribute("id", i + "|" + j);
       x.setAttribute("class", "cell");
       g.appendChild(x);
+      
     }
   }
   // t=100;
@@ -48,15 +49,15 @@ function randmize() {
     }
   }
   clearemaz();
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n; j++) {
+  for (let i = 0; i < n; i++){
+    for (let j = 0; j < n; j++){
       visited[i][j] = 0;
       let x = Math.floor(Math.random() * 3 + 1);
       if (x == 1 && !(i == s.i && j == s.j) && !(i == e.i && j == e.j)) {
         visited[i][j] = 2;
         let c = document.getElementById(i + "|" + j);
         c.classList.add("blocked");
-      } else {
+      }else{
         visited[i][j] = 0;
       }
     }
@@ -70,7 +71,7 @@ function clearemaz(){
         c.classList.remove("visited");
       }
       if (c.classList.contains("final")) {
-        c.classList.remove("final");
+          c.classList.remove("final");
       }
     }
   }
@@ -273,6 +274,87 @@ function dosf(curr, vis, animate){
   }
   return;
 }
+
+function A_star(){
+  clearemaz();
+  disablebuttons();
+  t = 100;
+  let animate = new Array();
+  let parent = new Array(n);
+let path = new Array();
+
+  let queue = new Array();
+  let vis = new Array(n);
+  let huiristic=new Array(n+1);
+  for (let i = 0; i < n; i++) {
+    vis[i] = new Array(n);
+    huiristic[i] = new Array(n+1);
+  }
+  huiristic[n]=new Array(n+1);
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      vis[i][j] = visited[i][j];
+      huiristic[i][j]=Math.abs(e.i-i)+Math.abs(e.j-j);
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    parent[i] = new Array(n);
+  }
+  for(let i = 0; i < n; i++) {
+    for(let j = 0; j < n; j++) {
+      parent[i][j] = { i: -1, j: -1 };
+    }
+  }
+  queue.push({i:s.i,j:s.j,cval:0,h:huiristic[s.i][s.j],total:0})
+  while(queue.length>0){
+    queue.sort((a, b) => a.total-b.total);
+    let curr = queue.shift();
+      animate.push(curr);
+      if (curr.i == e.i && curr.j == e.j) {
+        exist = 1;
+        a(animate);
+        putpath(parent,path);
+        setTimeout(enablebuttons,t)
+        return;
+      }
+
+      var up = { i: curr.i + 1, j: curr.j,cval:curr.cval+1,h:0,total:0};
+      var down = { i: curr.i - 1, j: curr.j ,cval:curr.cval+1,h:0,total:0};
+      var left = { i: curr.i, j: curr.j - 1,cval:curr.cval+1,h:0,total:0};
+      var right = { i: curr.i, j: curr.j + 1 ,cval:curr.cval+1,h:0,total:0};
+      if (isvalid(up, vis)){
+        up.h=huiristic[curr.i +1][curr.j];
+        up.total=up.h+up.cval;
+        queue.push(up);
+        parent[up.i][up.j]={i:curr.i,j:curr.j};
+        vis[up.i][up.j] = 1;
+      }
+      if (isvalid(down, vis)) {
+        down.h=huiristic[curr.i -1][curr.j];
+        down.total=down.h+down.cval;
+        queue.push(down);
+        parent[down.i][down.j] = { i: curr.i, j: curr.j };
+        vis[down.i][down.j] = 1;
+      }
+      if (isvalid(left, vis)){
+        left.h=huiristic[curr.i ][curr.j-1];
+        left.total=left.h+left.cval;
+        queue.push(left);
+        parent[left.i][left.j] = {i: curr.i,j:curr.j };
+        vis[left.i][left.j] = 1;
+      }
+      if (isvalid(right, vis)) {
+        right.h=huiristic[curr.i ][curr.j+1];
+        right.total=right.h+right.cval;
+        queue.push(right);
+        parent[right.i][right.j] = { i: curr.i, j: curr.j };
+        vis[right.i][right.j] = 1;
+      }
+  }
+  a(animate);
+  setTimeout(enablebuttons,t);
+  return;
+}
 // supporting 
 function isvalid(node, vis) {
   return (
@@ -289,7 +371,9 @@ function putpath(parent, path) {
     i: -1,
     j: -1,
   };
+  let count=0
   while (parent[curr.i][curr.j].i != -1 && parent[curr.i][curr.j].j != -1) {
+    if(curr.i==s.i && curr.j==s.j) break;
     path.push(curr);
     curr = parent[curr.i][curr.j];
   }
@@ -297,14 +381,19 @@ function putpath(parent, path) {
   printpath(path);
 }
 function disablebuttons(){
+
   document.getElementById("bsf").disabled = true;
   document.getElementById("dsf").disabled = true;
   document.getElementById("rnd").disabled = true;
   document.getElementById("clc").disabled = true;
+  document.getElementById("A_star").disabled = true;
+
 }
 function enablebuttons(){
   document.getElementById("bsf").disabled = false;
   document.getElementById("dsf").disabled = false;
   document.getElementById("rnd").disabled = false;
   document.getElementById("clc").disabled = false;
+  document.getElementById("A_star").disabled = false;
+
 }

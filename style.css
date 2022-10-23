@@ -1,18 +1,13 @@
 #grid{
   display: grid;
-  grid-template-columns: repeat(25,auto) ;
-  grid-template-rows: repeat(25,auto) ;;
+  grid-template-columns: repeat(29,auto) ;
+  grid-template-rows: repeat(29,auto) ;;
   justify-content: center;
-  /* padding: 10px; */
-  /* background: rgb(243, 240, 240); */
-
 }
 .cell{
   border: 1px solid rgb(76, 73, 73);
-  /* font-size: 30px; */
   border-radius: 2px;
   margin: .5px .5px;
-  /* text-align: center; */
   height: 20px;
   width: 20px;
 }
@@ -25,16 +20,19 @@
     background-color: rgb(25, 181, 243);
     border-radius: .5px;
     /* animation-name: example;
-    animation-duration: 1s; */
+    animation-duration: .5s; */
 }
 .final{
     background-color: rgb(240, 216, 1);
+    /* animation-name: finalanimation;
+    animation-duration: .5s; */
 }
 .start{
   background-color: rgb(255, 4, 4);
 }
 .buttons{
   display:  flex;
+  padding: 2px 2px;
   justify-content: center;
   margin: 10px 10px;
 }
@@ -45,4 +43,10 @@
 /* @keyframes example {
   from {background-color: white;}
   to {background-color: rgb(25, 181, 243);}
+  from {border-radius: 2px;}
+  to {border-radius: .5px;}
+}
+@keyframes finalanimation {
+  from {background-color:  rgb(25, 181, 243);}
+  to {background-color: rgb(240, 216, 1);}
 } */
