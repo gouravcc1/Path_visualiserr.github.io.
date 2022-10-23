@@ -126,7 +126,7 @@ function anime(animate) {
     }, t + 100);
   }
 }
-function a(animate) {
+function a(animate){
   let y;
   for (let x = 0; x < animate.length; x++) {
     y = setTimeout((p, q) => {
@@ -148,7 +148,9 @@ function a(animate) {
 
 // algorithm
 function bsf(){
+  clearemaz();
   disablebuttons();
+
   t = 100;
   let animate = new Array();
   let queue = new Array();
@@ -216,6 +218,7 @@ function bsf(){
   return;
 }
 function dsf() {
+  clearemaz();
   disablebuttons()
   let animate = new Array();
   let vis = new Array(n);
