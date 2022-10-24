@@ -40,6 +40,9 @@ function createmaz() {
 creatediv();
 createmaz();
 function randmize() {
+   document.getElementById("nodes_visited_BSF").innerHTML=("BSF : "+ 0);;
+  document.getElementById("nodes_visited_DSF").innerHTML=("DSF : "+ 0);;
+  document.getElementById("nodes_visited_A*").innerHTML=("A* : "+ 0);;
   disablebuttons();
   t=100;
   for (let i = 0; i < n; i++) {
@@ -71,6 +74,10 @@ function randmize() {
   }
 }
 function clearemaz(){
+ clranimation();
+}
+function clranimation(){
+  
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       let c = document.getElementById(i + "|" + j);
@@ -103,7 +110,13 @@ function printpath(path) {
     t += 100;
   }
 }
-function anime(animate) {
+function anime(animate){
+  let c=0;
+  for(let i = 0; i < animate.length; i++){
+    if (animate[i].x== 1) c++;
+  }
+  document.getElementById("nodes_visited_DSF").innerHTML=("DSF: "+ c);
+
   for (let i = 0; i < animate.length; i++) {
     if (animate[i].x== 1) {
       setTimeout(
@@ -192,7 +205,8 @@ function bsf(){
         exist = 1;
         a(animate);
         putpath(parent, path);
-        setTimeout(enablebuttons,t)
+        setTimeout(enablebuttons,t);
+        document.getElementById("nodes_visited_BSF").innerHTML=("BSF: "+ animate.length);
         return;
       }
       var up = { i: curr.i + 1, j: curr.j };
@@ -320,6 +334,7 @@ let path = new Array();
       if (curr.i == e.i && curr.j == e.j) {
         exist = 1;
         a(animate);
+        document.getElementById("nodes_visited_A*").innerHTML=("A* : "+ animate.length);;
         putpath(parent,path);
         setTimeout(enablebuttons,t)
         return;

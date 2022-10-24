@@ -5,6 +5,7 @@
     <title>path visualiser</title>
   </head>
   <body>
+
   <div class="buttons" id="button">
       <button id="bsf"   class="btn" onclick="bsf()">      BSF</button>
       <button id="dsf"   class="btn" onclick="dsf()">      DSF</button>
@@ -12,7 +13,18 @@
       <button id="rnd"   class="btn" onclick="randmize()"> Randomise maze</button>
       <button id="clc"   class="btn" onclick="clearemaz()">clear maze</button>
     </div>
-    <div id="grid"></div>
+    <div class="data">
+      <div class="showdata">
+        <div>
+          nodes visited
+        </div>
+       <div id="nodes_visited_BSF">BSF : 0</div>
+       <div id="nodes_visited_DSF">DSF : 0</div>
+       <div id="nodes_visited_A*">A* : 0</div>
+      </div>
+    <div id="grid">
+    </div>
+  </div>
   </body>
   <script src="main.js"></script>
 </html>
