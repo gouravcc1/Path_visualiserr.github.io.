@@ -433,11 +433,11 @@ function A_star() {
   setTimeout(enablebuttons, t);
   return;
 }
-let animate = new Array();
 
 function bi_BSF() {
   clearemaz();
   disablebuttons();
+let animate = new Array();
   t = 100;
   let queue1 = new Array();
   let queue2 = new Array();
