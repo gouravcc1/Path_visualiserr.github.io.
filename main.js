@@ -38,7 +38,7 @@ function createmaz() {
 }
 creatediv();
 createmaz();
-function clearnodes() {
+function clearnodes(){
   document.getElementById("nodes_visited_BSF").innerHTML = "BSF : " + 0;
   document.getElementById("nodes_visited_DSF").innerHTML = "DSF : " + 0;
   document.getElementById("nodes_visited_A*").innerHTML = "A* : " + 0;
@@ -77,9 +77,10 @@ function randmize() {
         visited[i][j] = 0;
       }
     }
-    setTimeout(enablebuttons, t + 1000);
     t = 100;
   }
+  setTimeout(enablebuttons, t + 1000);
+
 }
 function clearemaz() {
   clranimation();

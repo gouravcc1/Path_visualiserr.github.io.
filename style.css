@@ -78,13 +78,15 @@ button[disabled]{
 
 .data{
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 .showdata{
   padding: 5px;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  margin-left: 20px;
+
   /* display: flex; */
   background-color: aqua;
   height: fit-content;
