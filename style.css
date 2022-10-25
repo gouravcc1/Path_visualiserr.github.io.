@@ -80,12 +80,13 @@ button[disabled]{
   justify-content: center;
 }
 .showdata{
+  padding: 5px;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
   /* display: flex; */
   background-color: aqua;
   height: fit-content;
-  border: 2px solid black;
+  border: 1.5px solid black;
   border-radius: 8px;
 }
