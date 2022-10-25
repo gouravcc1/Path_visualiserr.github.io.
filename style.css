@@ -20,8 +20,9 @@
     /* background-color: rgb(106, 244, 170); */
     background-color: rgb(25, 181, 243);
     border-radius: .5px;
-    animation-name: example;
-    animation-duration: .5s;
+    /* animation-name: example;
+    animation-duration: .5s; */
+    animation: temp 280ms step-end;
 }
 .final{
     background-color: rgb(240, 216, 1);
@@ -89,4 +90,27 @@ button[disabled]{
   height: fit-content;
   border: 1.5px solid black;
   border-radius: 8px;
+}
+@keyframes temp{
+  0%{
+    background-color: rgb(0, 26, 255);
+    border-radius: 50%;
+    
+  }
+  33%{
+    background-color: rgb(60, 190, 255);
+    border-radius: 33%;
+    
+  }
+  66%{
+    background-color: rgb(7, 181, 255);
+    border-radius: 17%;
+    
+  }
+  100%{
+    background-color: rgb(25, 181, 243);
+    border-radius: 0%;
+    
+  }
+
 }

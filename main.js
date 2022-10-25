@@ -38,12 +38,11 @@ function createmaz() {
 }
 creatediv();
 createmaz();
-function clearnodes(){
+function clearnodes() {
   document.getElementById("nodes_visited_BSF").innerHTML = "BSF : " + 0;
   document.getElementById("nodes_visited_DSF").innerHTML = "DSF : " + 0;
   document.getElementById("nodes_visited_A*").innerHTML = "A* : " + 0;
-  document.getElementById("nodes_visited_BD_BSF").innerHTML =
-        "BD_BSF : " + 0;
+  document.getElementById("nodes_visited_BD_BSF").innerHTML = "BD_BSF : " + 0;
 }
 function randmize() {
   disablebuttons();
@@ -123,12 +122,11 @@ function printpath(path) {
     t += 100;
   }
 }
-function anime(animate){
+function anime(animate) {
   let c = 0;
   for (let i = 0; i < animate.length; i++) {
     if (animate[i].x == 1) c++;
   }
-  document.getElementById("nodes_visited_DSF").innerHTML = "DSF: " + c;
 
   for (let i = 0; i < animate.length; i++) {
     if (animate[i].x == 1) {
@@ -154,13 +152,16 @@ function anime(animate){
     }
     t += 30;
   }
+  setTimeout(() => {
+    document.getElementById("nodes_visited_DSF").innerHTML = "DSF: " + c;
+  }, t);
   if (!exist) {
     setTimeout(() => {
       alert("PATH NOT FOUND");
     }, t + 100);
   }
 }
-function a(animate){
+function a(animate) {
   let y;
   for (let x = 0; x < animate.length; x++) {
     y = setTimeout(
@@ -181,9 +182,9 @@ function a(animate){
   }
   // t=100;
 }
-function putpathBDBFS(parent,parent1,node){
-  let path=new Array();
-  let path1=new Array();
+function putpathBDBFS(parent, parent1, node) {
+  let path = new Array();
+  let path1 = new Array();
   let curr = node;
   let curr1 = node;
   while (parent[curr.i][curr.j].i != -1 && parent[curr.i][curr.j].j != -1) {
@@ -192,13 +193,16 @@ function putpathBDBFS(parent,parent1,node){
     curr = parent[curr.i][curr.j];
   }
 
-  while (parent1[curr1.i][curr1.j].i != -1 && parent1[curr1.i][curr1.j].j != -1) {
+  while (
+    parent1[curr1.i][curr1.j].i != -1 &&
+    parent1[curr1.i][curr1.j].j != -1
+  ) {
     if (curr1.i == e.i && curr1.j == e.j) break;
     path1.push(curr1);
     curr1 = parent1[curr1.i][curr1.j];
   }
   path.reverse();
-  for(let i=0;i<path1.length;i++){
+  for (let i = 0; i < path1.length; i++) {
     path.push(path1[i]);
   }
   // path.reverse();
@@ -208,7 +212,6 @@ function putpathBDBFS(parent,parent1,node){
 function bsf() {
   clearemaz();
   disablebuttons();
-
   t = 100;
   let animate = new Array();
   let queue = new Array();
@@ -243,8 +246,11 @@ function bsf() {
         a(animate);
         putpath(parent, path);
         setTimeout(enablebuttons, t);
-        document.getElementById("nodes_visited_BSF").innerHTML =
-          "BSF: " + animate.length;
+        setTimeout(() => {
+          document.getElementById("nodes_visited_BSF").innerHTML =
+            "BSF: " + animate.length;
+        }, t);
+
         return;
       }
       var up = { i: curr.i + 1, j: curr.j };
@@ -275,6 +281,10 @@ function bsf() {
   }
   a(animate);
   setTimeout(enablebuttons, t);
+  setTimeout(() => {
+    document.getElementById("nodes_visited_BSF").innerHTML =
+      "BSF: " + animate.length;
+  }, t);
   return;
 }
 function dsf() {
@@ -371,13 +381,14 @@ function A_star() {
     if (curr.i == e.i && curr.j == e.j) {
       exist = 1;
       a(animate);
-      document.getElementById("nodes_visited_A*").innerHTML =
-        "A* : " + animate.length;
+      setTimeout(() => {
+        document.getElementById("nodes_visited_A*").innerHTML =
+          "A* : " + animate.length;
+      }, t);
       putpath(parent, path);
       setTimeout(enablebuttons, t);
       return;
     }
-
     var up = { i: curr.i + 1, j: curr.j, cval: curr.cval + 1, h: 0, total: 0 };
     var down = {
       i: curr.i - 1,
@@ -431,13 +442,17 @@ function A_star() {
   }
   a(animate);
   setTimeout(enablebuttons, t);
+  setTimeout(() => {
+    document.getElementById("nodes_visited_A*").innerHTML =
+      "A* : " + animate.length;
+  }, t);
   return;
 }
 
 function bi_BSF() {
   clearemaz();
   disablebuttons();
-let animate = new Array();
+  let animate = new Array();
   t = 100;
   let queue1 = new Array();
   let queue2 = new Array();
@@ -477,10 +492,13 @@ let animate = new Array();
         exist = 1;
         a(animate);
         // putpath(parent, path);
-        putpathBDBFS(parent,parent1,curr);
+        putpathBDBFS(parent, parent1, curr);
         setTimeout(enablebuttons, t);
-        document.getElementById("nodes_visited_BD_BSF").innerHTML =
-        "BD_BSF : " + animate.length;
+        setTimeout(() => {
+          document.getElementById("nodes_visited_BD_BSF").innerHTML =
+            "BD_BSF : " + animate.length;
+        }, t);
+
         return;
       }
       var up = { i: curr.i + 1, j: curr.j };
@@ -515,7 +533,7 @@ let animate = new Array();
         exist = 1;
         a(animate);
         // putpath(parent, path);
-        putpathBDBFS(parent,parent1,curr);
+        putpathBDBFS(parent, parent1, curr);
         setTimeout(enablebuttons, t);
         return;
       }
@@ -547,6 +565,10 @@ let animate = new Array();
   }
   a(animate);
   setTimeout(enablebuttons, t);
+  setTimeout(() => {
+    document.getElementById("nodes_visited_BD_BSF").innerHTML =
+      "BD_BSF : " + animate.length;
+  }, t);
   return;
 }
 
