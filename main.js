@@ -120,7 +120,7 @@ function printpath(path) {
       path[x].i,
       path[x].j
     );
-    t += 100;
+    t += 50;
   }
 }
 function anime(animate) {
@@ -202,12 +202,16 @@ function putpathBDBFS(parent, parent1, node) {
     path1.push(curr1);
     curr1 = parent1[curr1.i][curr1.j];
   }
-  path.reverse();
-  for (let i = 0; i < path1.length; i++) {
-    path.push(path1[i]);
-  }
   // path.reverse();
+  // for (let i = 0; i < path1.length; i++) {
+  //   path.push(path1[i]);
+  // }
+  // path.reverse();
+  let x=t;
   printpath(path);
+  t=x;
+  printpath(path1);
+
 }
 // algorithm
 function bsf() {
@@ -301,6 +305,7 @@ function dsf() {
       vis[i][j] = visited[i][j];
     }
   }
+  // vis[s.i][s.j]=1;
   dosf(s, vis, animate);
   anime(animate);
   setTimeout(enablebuttons, t);
