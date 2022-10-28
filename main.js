@@ -1,11 +1,11 @@
 const n = 29;
 var visited;
-let t = 100;
-// let time_increament;
-// start end intialization
-let s = { i: 7, j: 7 };
-let e = { i: 20, j: 20 };
-function creatediv() {
+let exist = 0,
+t = 100;
+let s = { i: 7, j: 7};
+let e = { i: 20, j: 20};
+
+function creatediv(){
   var g = document.getElementById("grid");
   for (var i = 0; i < n; i++) {
     for (var j = 0; j < n; j++) {
@@ -15,6 +15,10 @@ function creatediv() {
       g.appendChild(x);
     }
   }
+  let temp = document.getElementById(s.i + "|" + s.j);
+  temp.classList.add("start");
+  temp = document.getElementById(e.i + "|" + e.j);
+  temp.classList.add("start");
   // t=100;
 }
 function createmaz() {
@@ -38,7 +42,7 @@ function createmaz() {
 }
 creatediv();
 createmaz();
-function clearnodes(){
+function clearnodes() {
   document.getElementById("nodes_visited_BSF").innerHTML = "BSF : " + 0;
   document.getElementById("nodes_visited_DSF").innerHTML = "DSF : " + 0;
   document.getElementById("nodes_visited_A*").innerHTML = "A* : " + 0;
@@ -80,7 +84,6 @@ function randmize() {
     t = 100;
   }
   setTimeout(enablebuttons, t + 1000);
-
 }
 function clearemaz() {
   clranimation();
@@ -100,11 +103,6 @@ function clranimation() {
   t = 100;
   exist = 0;
 }
-let temp = document.getElementById(s.i + "|" + s.j);
-temp.classList.add("start");
-temp = document.getElementById(e.i + "|" + e.j);
-temp.classList.add("start");
-let exist = 0;
 ////////////////////////////////////////
 // animations
 function printpath(path) {
@@ -183,37 +181,8 @@ function a(animate) {
   }
   // t=100;
 }
-function putpathBDBFS(parent, parent1, node) {
-  let path = new Array();
-  let path1 = new Array();
-  let curr = node;
-  let curr1 = node;
-  while (parent[curr.i][curr.j].i != -1 && parent[curr.i][curr.j].j != -1) {
-    if (curr.i == s.i && curr.j == s.j) break;
-    path.push(curr);
-    curr = parent[curr.i][curr.j];
-  }
 
-  while (
-    parent1[curr1.i][curr1.j].i != -1 &&
-    parent1[curr1.i][curr1.j].j != -1
-  ) {
-    if (curr1.i == e.i && curr1.j == e.j) break;
-    path1.push(curr1);
-    curr1 = parent1[curr1.i][curr1.j];
-  }
-  // path.reverse();
-  // for (let i = 0; i < path1.length; i++) {
-  //   path.push(path1[i]);
-  // }
-  // path.reverse();
-  let x=t;
-  printpath(path);
-  t=x;
-  printpath(path1);
-
-}
-// algorithm
+//////////////// algorithm /////////////////////////////////////////////////
 function bsf() {
   clearemaz();
   disablebuttons();
@@ -305,7 +274,7 @@ function dsf() {
       vis[i][j] = visited[i][j];
     }
   }
-  // vis[s.i][s.j]=1;
+  vis[s.i][s.j] = 1;
   dosf(s, vis, animate);
   anime(animate);
   setTimeout(enablebuttons, t);
@@ -454,7 +423,6 @@ function A_star() {
   }, t);
   return;
 }
-
 function bi_BSF() {
   clearemaz();
   disablebuttons();
@@ -577,8 +545,7 @@ function bi_BSF() {
   }, t);
   return;
 }
-
-// supporting
+//////////// supporting/////////////////
 function isvalid(node, vis) {
   return (
     node.i < n &&
@@ -603,6 +570,36 @@ function putpath(parent, path) {
   path.reverse();
   printpath(path);
 }
+function putpathBDBFS(parent, parent1, node) {
+  let path = new Array();
+  let path1 = new Array();
+  let curr = node;
+  let curr1 = node;
+  while (parent[curr.i][curr.j].i != -1 && parent[curr.i][curr.j].j != -1) {
+    if (curr.i == s.i && curr.j == s.j) break;
+    path.push(curr);
+    curr = parent[curr.i][curr.j];
+  }
+
+  while (
+    parent1[curr1.i][curr1.j].i != -1 &&
+    parent1[curr1.i][curr1.j].j != -1
+  ) {
+    if (curr1.i == e.i && curr1.j == e.j) break;
+    path1.push(curr1);
+    curr1 = parent1[curr1.i][curr1.j];
+  }
+  // path.reverse();
+  // for (let i = 0; i < path1.length; i++) {
+  //   path.push(path1[i]);
+  // }
+  // path.reverse();
+  let x = t;
+  printpath(path);
+  t = x;
+  printpath(path1);
+}
+/////////////////Buttons /////////////////
 function disablebuttons() {
   document.getElementById("bsf").disabled = true;
   document.getElementById("dsf").disabled = true;
